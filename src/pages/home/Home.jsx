@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import Layout from "../../components/layout/Layout";
+import myContext from "../../context/myContext";
+
 const Home = () => {
+  const context = useContext(myContext);
+
   return (
     <>
-      <Layout>Home</Layout>
+      <Layout>
+        <p>Name: {context.name} </p>
+        <p>Name: {context.rollno} </p>
+      </Layout>
     </>
   );
 };

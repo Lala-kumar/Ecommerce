@@ -7,6 +7,8 @@ import Cart from "./pages/cart/Cart";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
 import NoPage from "./pages/nopage/NoPage";
 
+import MyState from "./context/myState";
+
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/order", element: <Order /> },
@@ -16,7 +18,11 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <MyState>
+      <RouterProvider router={router} />
+    </MyState>
+  );
 };
 
 export default App;
