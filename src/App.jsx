@@ -11,6 +11,8 @@ import NoPage from "./pages/nopage/NoPage";
 
 import MyState from "./context/myState";
 import ProductInfo from "./pages/productInfo/ProductInfo";
+import AddProduct from "./pages/admin/page/AddProduct";
+import UpdateProduct from "./pages/admin/page/UpdateProduct";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -20,6 +22,8 @@ const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <Signup /> },
   { path: "/productinfo/:id", element: <ProductInfo /> },
+  { path: "/addproduct", element: <AddProduct /> },
+  { path: "/updateproduct", element: <UpdateProduct /> },
   { path: "/*", element: <NoPage /> },
 ]);
 
