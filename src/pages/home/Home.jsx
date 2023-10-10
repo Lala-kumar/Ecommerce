@@ -4,6 +4,7 @@ import HeroSection from "../../components/heroSection/HeroSection";
 import Filter from "../../components/filter/Filter";
 import ProductCard from "../../components/productCard/productCard";
 import Track from "../../components/track/Track";
+import Testimonial from "../../components/testimonial/Testimonial";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
         <Filter />
         <ProductCard />
         <Track />
+        <Testimonial/>
       </Layout>
     </>
   );
