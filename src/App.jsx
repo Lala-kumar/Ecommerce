@@ -10,6 +10,7 @@ import Signup from "./pages/registration/Signup";
 import NoPage from "./pages/nopage/NoPage";
 
 import MyState from "./context/myState";
+import ProductInfo from "./pages/productInfo/ProductInfo";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
   { path: "/dashboard", element: <Dashboard /> },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <Signup /> },
+  { path: "/productinfo/:id", element: <ProductInfo /> },
   { path: "/*", element: <NoPage /> },
 ]);
 
