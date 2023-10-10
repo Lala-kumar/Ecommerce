@@ -1,8 +1,8 @@
-import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 
-const Modal = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Modal() {
+  let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -14,11 +14,11 @@ const Modal = () => {
 
   return (
     <>
-      <div className="text-center rounded-lg text-white font-bold">
+      <div className="  text-center rounded-lg text-white font-bold">
         <button
           type="button"
           onClick={openModal}
-          className="w-full  bg-violet-600 py-2 text-center rounded-lg text-white font-bold "
+          className="w-full  bg-violet-600 py-2 text-center rounded-lg text-white font-bold"
         >
           Buy Now
         </button>
@@ -49,10 +49,10 @@ const Modal = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl p-2  text-left align-middle shadow-xl transition-all bg-gray-50 mt-20">
-                  <section className="flex flex-col items-center justify-center mx-auto   lg:py-0">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl p-2  text-left align-middle shadow-xl transition-all bg-gray-50 mt-20 ">
+                  <section className="flex flex-col items-center justify-center mx-auto  lg:py-0">
                     <div className="w-full  rounded-lg md:mt-0 sm:max-w-md xl:p-0 ">
-                      <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                      <div className="p-4 space-y-4 md:space-y-6 sm:p-8">
                         <form className="space-y-4 md:space-y-6" action="#">
                           <div>
                             <label
@@ -61,7 +61,6 @@ const Modal = () => {
                             >
                               Enter Full Name
                             </label>
-
                             <input
                               type="name"
                               name="name"
@@ -70,7 +69,6 @@ const Modal = () => {
                               required
                             />
                           </div>
-
                           <div>
                             <label
                               htmlFor="email"
@@ -78,7 +76,6 @@ const Modal = () => {
                             >
                               Enter Full Address
                             </label>
-
                             <input
                               type="text"
                               name="address"
@@ -87,7 +84,6 @@ const Modal = () => {
                               required
                             />
                           </div>
-
                           <div>
                             <label
                               htmlFor="pincode"
@@ -95,7 +91,6 @@ const Modal = () => {
                             >
                               Enter Pincode
                             </label>
-
                             <input
                               type="text"
                               name="pincode"
@@ -104,7 +99,6 @@ const Modal = () => {
                               required
                             />
                           </div>
-
                           <div>
                             <label
                               htmlFor="mobileNumber"
@@ -112,7 +106,6 @@ const Modal = () => {
                             >
                               Enter Mobile Number
                             </label>
-
                             <input
                               type="text"
                               name="mobileNumber"
@@ -122,11 +115,10 @@ const Modal = () => {
                             />
                           </div>
                         </form>
-
                         <button
                           onClick={closeModal}
                           type="button"
-                          className="focus:outline-none w-full text-white bg-violet-600  hover:bg-violet-800  outline-0 font-medium rounded-lg text-sm px-5 py-2.5 "
+                          className="focus:outline-none w-full text-white bg-violet-600 hover:bg-violet-800  outline-0 font-medium rounded-lg text-sm px-5 py-2.5 "
                         >
                           Order Now
                         </button>
@@ -141,6 +133,4 @@ const Modal = () => {
       </Transition>
     </>
   );
-};
-
-export default Modal;
+}
