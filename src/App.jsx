@@ -1,5 +1,8 @@
 import React from "react";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Order from "./pages/order/Order";
@@ -31,6 +34,7 @@ const App = () => {
   return (
     <MyState>
       <RouterProvider router={router} />
+      <ToastContainer/>
     </MyState>
   );
 };
