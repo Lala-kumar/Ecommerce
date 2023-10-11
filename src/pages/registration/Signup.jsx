@@ -26,7 +26,7 @@ const Signup = () => {
 
   const passwordHandler = (event) => {
     setPassword(event.target.value);
-  };
+  }; 
 
   const signup = async () => {
     setLoading(true);
@@ -59,7 +59,16 @@ const Signup = () => {
 
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      toast.error('Signin Failed', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       setLoading(false);
     }
   };
