@@ -7,7 +7,11 @@ import {
   onSnapshot,
   orderBy,
   query,
+  setDoc,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
+
 import { fireDB } from "../fireabase/firebaseConfig";
 import { toast } from "react-toastify";
 
@@ -62,16 +66,9 @@ const MyState = (props) => {
       setLoading(false);
       return () => data;
     } catch (error) {
-      console.error(error); // Log the error for debugging purposes
+      console.error(error);
 
-      // Handle specific error cases and show custom error messages
-      if (error.code === "permission-denied") {
-        toast.error("Permission denied. Please check your access rights.");
-      } else if (error.code === "unavailable") {
-        toast.error("Service unavailable. Please try again later.");
-      } else {
-        toast.error("An error occurred. Please try again.");
-      }
+      toast.error("An error occurred. Please try again.");
     }
     setLoading(false);
   });
@@ -103,30 +100,75 @@ const MyState = (props) => {
       clearFields();
       toast.success("Added product succefully!");
       setTimeout(() => {
-      window.location.href = "/dashboard";
+        window.location.href = "/dashboard";
       }, 700);
       getProduct();
 
       setLoading(false);
     } catch (error) {
-      console.error(error); // Log the error for debugging purposes
-
-      // Handle specific error cases and show custom error messages
-      if (error.code === "permission-denied") {
-        toast.error(
-          "Permission denied. You don't have access to add products."
-        );
-      } else if (error.code === "invalid-argument") {
-        toast.error("Invalid data provided. Please check your input.");
-      } else {
-        toast.error(
-          "An error occurred while adding the product. Please try again."
-        );
-      }
+      console.error(error);
+      toast.error(
+        "An error occurred while adding the product. Please try again."
+      );
     }
     setLoading(false);
   };
 
+  // ********************** Update, Delete & Edit Products Section  **********************
+
+  //edit product
+
+  const editHandler = (item) => {
+    setProducts(item);
+  };
+
+  //update product
+
+  const updateProduct = async () => {
+    setLoading(true);
+    try {
+      //setDoc(reference, data) is used to set the data of a specific document.
+      //doc(fireDb, "products", products.id) constructs a reference to a specific document in the "products" collection.
+      await setDoc(doc(fireDB, "products", products.id), products);
+
+      clearFields();
+      toast.success("Product Updated successfully");
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 800);
+
+      getProduct(); // Fetch updated product data from the database
+
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to update product. Please try again later.");
+      setLoading(false);
+    }
+    setLoading(false);
+  };
+
+  // delete product
+
+  const deleteProduct = async (item) => {
+    try {
+      setLoading(true);
+
+      //deleteDoc(reference) deletes the document specified by the provided reference.
+      //doc(fireDb, "products", item.id) constructs a reference to the specific document in the "products" collection identified by item.id.
+      await deleteDoc(doc(fireDB, "products", item.id));
+
+      toast.success("Product Deleted successfully");
+      setLoading(false);
+      getProduct();
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to delete product. Please try again later.");
+      setLoading(false);
+    }
+  };
+
+  
   // ********************** Toggle mode Section  **********************
   const toggleMode = () => {
     if (mode === "light") {
@@ -151,6 +193,9 @@ const MyState = (props) => {
         setProducts,
         addProduct,
         product,
+        editHandler,
+        updateProduct,
+        deleteProduct,
       }}
     >
       {props.children}
