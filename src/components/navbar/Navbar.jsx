@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { BsFillCloudSunFill } from "react-icons/bs";
 import { FiSun } from "react-icons/fi";
 import myContext from "../../context/myContext";
+import { useSelector } from "react-redux";
 
 import { Dialog, Transition } from "@headlessui/react";
 import { RxCross2 } from "react-icons/rx";
@@ -26,6 +27,8 @@ const Navbar = () => {
     // navigate("/login");
     // <Navigate to={"/login"} />;
   };
+
+  const cartItem = useSelector((state) => state.cart);
 
   return (
     <Fragment>
@@ -342,7 +345,7 @@ const Navbar = () => {
                       className="ml-2 text-sm font-medium text-gray-700 group-"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
-                      0
+                      {cartItem.length}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </Link>
