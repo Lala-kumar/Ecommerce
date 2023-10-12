@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import MyContext from "./myContext";
 import {
   Timestamp,
@@ -31,11 +31,14 @@ const MyState = (props) => {
   const [products, setProducts] = useState(defaultProduct);
   const [product, setProduct] = useState([]);
 
+  const clearFields = () => {
+    setProducts(defaultProduct);
+  };
+
   // ********************** Get Product Section  **********************
 
-  const getProduct = () => {
+  const getProduct = useCallback(() => {
     setLoading(true);
-
     try {
       // Creates a query to get data from the "products" collection in a Firestore database
       const q = query(
@@ -44,7 +47,6 @@ const MyState = (props) => {
         orderBy("time")
       );
 
-      console.log(q);
       const data = onSnapshot(q, (QuerySnapshot) => {
         let productsArray = [];
 
@@ -53,13 +55,11 @@ const MyState = (props) => {
           productsArray.push({ ...doc.data(), id: doc.id });
         });
 
-        console.log(productsArray);
         setProduct(productsArray);
-        setLoading(false);
       });
 
-      console.log(data);
       // Returns a cleanup function. This function will be called when the component unmounts
+      setLoading(false);
       return () => data;
     } catch (error) {
       console.error(error); // Log the error for debugging purposes
@@ -72,13 +72,13 @@ const MyState = (props) => {
       } else {
         toast.error("An error occurred. Please try again.");
       }
-      setLoading(false);
     }
-  };
+    setLoading(false);
+  });
 
   useEffect(() => {
     getProduct();
-  }, [getProduct]);
+  }, []);
 
   // ********************** Add Products Section  **********************
   const addProduct = async () => {
@@ -100,8 +100,13 @@ const MyState = (props) => {
       //add a new document (record) to this collection
       await addDoc(productRef, products);
 
+      clearFields();
       toast.success("Added product succefully!");
+      setTimeout(() => {
+      window.location.href = "/dashboard";
+      }, 700);
       getProduct();
+
       setLoading(false);
     } catch (error) {
       console.error(error); // Log the error for debugging purposes
@@ -118,9 +123,8 @@ const MyState = (props) => {
           "An error occurred while adding the product. Please try again."
         );
       }
-
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   // ********************** Toggle mode Section  **********************

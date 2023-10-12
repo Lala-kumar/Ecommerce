@@ -5,7 +5,7 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { FaUser, FaCartPlus } from "react-icons/fa";
 import { AiFillShopping, AiFillPlusCircle, AiFillDelete } from "react-icons/ai";
 
-function DashboardTab() {
+const DashboardTab = () => {
   const context = useContext(myContext);
   const { mode } = context;
   let [isOpen, setIsOpen] = useState(false);
@@ -17,8 +17,13 @@ function DashboardTab() {
   function openModal() {
     setIsOpen(true);
   }
+
+  const add = () => {
+    window.location.href = "/addproduct";
+  };
+
   return (
-    <>
+    <Fragment>
       {/* <div className="container mx-auto"> */}
       <div className="tab container mx-auto ">
         <Tabs defaultIndex={0}>
@@ -66,8 +71,10 @@ function DashboardTab() {
               >
                 Product Details
               </h1>
+
               <div className=" flex justify-end">
                 <button
+                  onClick={add}
                   type="button"
                   className="focus:outline-none text-white bg-pink-600 shadow-[inset_0_0_10px_rgba(0,0,0,0.6)] border hover:bg-pink-700 outline-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
                   style={{
@@ -75,7 +82,6 @@ function DashboardTab() {
                     color: mode === "dark" ? "white" : "",
                   }}
                 >
-                  {" "}
                   <div className="flex gap-2 items-center">
                     Add Product <FaCartPlus size={20} />
                   </div>
@@ -451,8 +457,8 @@ function DashboardTab() {
         </Tabs>
       </div>
       {/* </div> */}
-    </>
+    </Fragment>
   );
-}
+};
 
 export default DashboardTab;
