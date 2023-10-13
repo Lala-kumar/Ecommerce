@@ -5,9 +5,15 @@ import Modal from "../../components/modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFromCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
+import { fireDB } from '../../fireabase/FirebaseConfig';
+import { addDoc, collection } from 'firebase/firestore';
 
 const Cart = () => {
   const [totalAmount, setTotalAmount] = useState(0);
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const context = useContext(myContext);
   const { mode } = context;
@@ -43,6 +49,76 @@ const Cart = () => {
   } else {
     grandTotal = shipping + totalAmount;
   }
+
+  //razorpay integration
+  const buyNow = async () => {
+    //validation
+    if (name === "" || address == "" || pincode == "" || phoneNumber == "") {
+      return toast.error("All fields are required", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+
+    //address information of customer
+    const addressInfo = {
+      name,
+      address,
+      pincode,
+      phoneNumber,
+      date: new Date().toLocaleString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      }),
+    };
+
+    //configure the parameters for the Razorpay payment gateway integration.
+    var options = {
+      key: "rzp_test_HR9aPqync46wqI",
+      key_secret: "iBqPx8jQbZSNUwlYiJjSjdUr",
+      amount: parseInt(grandTotal * 100) ,
+      currency: "INR",
+      order_receipt: "order_rcptid_" + name,
+      name: "E-Shop",
+      description: "for testing purpose",
+      handler: function (response) {
+        toast.success("Payment Successful");
+
+        const paymentId = response.razorpay_payment_id;
+
+        // Payment Handling:
+        const orderInfo = {
+          cartItems,
+          addressInfo,
+          date: new Date().toLocaleString("en-US", {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+          }),
+          email: JSON.parse(localStorage.getItem("user")).user.email,
+          userid: JSON.parse(localStorage.getItem("user")).user.uid,
+          paymentId,
+        };
+
+        //Storing Data in Firebase:
+        try {
+          const result = addDoc(collection(fireDB, "orders"), orderInfo);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
+    };
+    var pay = new window.Razorpay(options);
+    pay.open();
+  };
 
   return (
     <Layout>
@@ -186,7 +262,17 @@ const Cart = () => {
             </div>
 
             {/* <Modal  /> */}
-            <Modal />
+            <Modal
+              name={name}
+              address={address}
+              pincode={pincode}
+              phoneNumber={phoneNumber}
+              setName={setName}
+              setAddress={setAddress}
+              setPincode={setPincode}
+              setPhoneNumber={setPhoneNumber}
+              buyNow={buyNow}
+            />
           </section>
         </div>
       </main>
