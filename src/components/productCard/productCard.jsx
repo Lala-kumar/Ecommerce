@@ -48,14 +48,17 @@ const ProductCard = () => {
           <div className="h-1 w-20 bg-pink-600 rounded"></div>
         </div>
 
-        <section className="flex flex-wrap -m-4">
+        <section className="flex flex-wrap -m-4 justify-center items-center ">
           {product.map((item, index) => {
             const { title, price, imageUrl } = item;
 
             return (
-              <div key={index} className="p-4 md:w-1/4  drop-shadow-lg ">
+              <div
+                key={index}
+                className="p-4 md:w-1/4  drop-shadow-lg justify-center items-center"
+              >
                 <div
-                  className="h-full border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out    border-gray-200 border-opacity-60 rounded-2xl overflow-hidden"
+                  className=" h-full border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out    border-gray-200 border-opacity-60 rounded-2xl overflow-hidden"
                   style={{
                     backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
                     color: mode === "dark" ? "white" : "",

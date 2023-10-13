@@ -11,7 +11,7 @@ const cartSlice = createSlice({
     },
 
     deleteFromCart(state, action) {
-      state.items.filter((item) => item.id !== action.payload.id);
+      return state.filter((item) => item.id !== action.payload.id);
     },
   },
 });
