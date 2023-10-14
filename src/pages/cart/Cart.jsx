@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, lazy, Suspense } from "react";
 import myContext from "../../context/myContext";
 import Layout from "../../components/layout/Layout";
-import Modal from "../../components/modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFromCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
-import { fireDB } from '../../fireabase/FirebaseConfig';
-import { addDoc, collection } from 'firebase/firestore';
+import { fireDB } from "../../fireabase/firebaseConfig";
+import { addDoc, collection } from "firebase/firestore";
+
+// import Modal from "../../components/modal/Modal";
+const Modal = lazy(() => import("../../components/modal/Modal"));
 
 const Cart = () => {
   const [totalAmount, setTotalAmount] = useState(0);
@@ -83,7 +85,7 @@ const Cart = () => {
     var options = {
       key: "rzp_test_HR9aPqync46wqI",
       key_secret: "iBqPx8jQbZSNUwlYiJjSjdUr",
-      amount: parseInt(grandTotal * 100) ,
+      amount: parseInt(grandTotal * 100),
       currency: "INR",
       order_receipt: "order_rcptid_" + name,
       name: "E-Shop",
@@ -114,7 +116,6 @@ const Cart = () => {
           console.error(error);
         }
       },
-
     };
     var pay = new window.Razorpay(options);
     pay.open();
@@ -262,17 +263,19 @@ const Cart = () => {
             </div>
 
             {/* <Modal  /> */}
-            <Modal
-              name={name}
-              address={address}
-              pincode={pincode}
-              phoneNumber={phoneNumber}
-              setName={setName}
-              setAddress={setAddress}
-              setPincode={setPincode}
-              setPhoneNumber={setPhoneNumber}
-              buyNow={buyNow}
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Modal
+                name={name}
+                address={address}
+                pincode={pincode}
+                phoneNumber={phoneNumber}
+                setName={setName}
+                setAddress={setAddress}
+                setPincode={setPincode}
+                setPhoneNumber={setPhoneNumber}
+                buyNow={buyNow}
+              />
+            </Suspense>
           </section>
         </div>
       </main>
