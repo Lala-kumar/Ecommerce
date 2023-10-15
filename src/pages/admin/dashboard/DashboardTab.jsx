@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const DashboardTab = () => {
   const context = useContext(myContext);
-  const { mode, product, editHandler, deleteProduct } = context;
+  const { mode, product, editHandler, deleteProduct, order } = context;
 
   let [isOpen, setIsOpen] = useState(false);
 
@@ -66,7 +66,7 @@ const DashboardTab = () => {
 
           {/* product panel */}
           <TabPanel>
-            <div className="  px-4 md:px-0 mb-16">
+            <section className="  px-4 md:px-0 mb-16">
               <h1
                 className=" text-center mb-5 text-3xl font-semibold underline"
                 style={{ color: mode === "dark" ? "white" : "" }}
@@ -207,22 +207,22 @@ const DashboardTab = () => {
 
                                 {/* edit logo */}
                                 <Link to={"/updateproduct"}>
-                                <section onClick={() => editHandler(item)}>
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="w-6 h-6"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                                    />
-                                  </svg>
-                                </section>
+                                  <section onClick={() => editHandler(item)}>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth={1.5}
+                                      stroke="currentColor"
+                                      className="w-6 h-6"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                                      />
+                                    </svg>
+                                  </section>
                                 </Link>
                               </div>
                             </div>
@@ -233,152 +233,175 @@ const DashboardTab = () => {
                   })}
                 </table>
               </div>
-            </div>
+            </section>
           </TabPanel>
 
           {/* order panel */}
           <TabPanel>
-            {/* <Order order={order} setOrder={setOrder} setLoading={setLoading} /> */}
-            <div className="relative overflow-x-auto mb-16">
+            <section className="relative overflow-x-auto mb-16">
               <h1
                 className=" text-center mb-5 text-3xl font-semibold underline"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
                 Order Details
               </h1>
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead
-                  className="text-xs text-black uppercase bg-gray-200 "
-                  style={{
-                    backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
-                    color: mode === "dark" ? "white" : "",
-                  }}
-                >
-                  <tr>
-                    <th scope="col" className="px-6 py-3">
-                      Payment Id
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Image
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Title
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Price
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Category
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Name
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Address
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Pincode
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Phone Number
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Email
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Date
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    className="bg-gray-50 border-b  dark:border-gray-700"
-                    style={{
-                      backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
-                      color: mode === "dark" ? "white" : "",
-                    }}
-                  >
-                    <td
-                      className="px-6 py-4 text-black "
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      3393939
-                    </td>
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-black whitespace-nowrap"
-                    >
-                      <img
-                        className="w-16"
-                        src="https://dummyimage.com/720x400"
-                        alt="img"
-                      />
-                    </th>
-                    <td
-                      className="px-6 py-4 text-black "
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      Title
-                    </td>
-                    <td
-                      className="px-6 py-4 text-black "
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      ₹100
-                    </td>
-                    <td
-                      className="px-6 py-4 text-black "
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      pots
-                    </td>
 
-                    <td
-                      className="px-6 py-4 text-black "
-                      style={{ color: mode === "dark" ? "white" : "" }}
+              {/* map order */}
+
+              {order.map((allorder) => {
+                return (
+                  <table
+                    key={`${allorder.userId}_${allorder.paymentId}`}
+                    className="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+                  >
+                    <thead
+                      className="text-xs text-black uppercase bg-gray-200 "
+                      style={{
+                        backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
+                        color: mode === "dark" ? "white" : "",
+                      }}
                     >
-                      name
-                    </td>
-                    <td
-                      className="px-6 py-4 text-black "
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      india
-                    </td>
-                    <td
-                      className="px-6 py-4 text-black "
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      82828
-                    </td>
-                    <td
-                      className="px-6 py-4 text-black "
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      929929929929
-                    </td>
-                    <td
-                      className="px-6 py-4 text-black "
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      kkakka@gmail.com
-                    </td>
-                    <td
-                      className="px-6 py-4 text-black "
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      12 Aug 2019
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                      <tr>
+                        <th scope="col" className="px-6 py-3">
+                          S.No.
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Payment Id
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Image
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Title
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Price
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Category
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Name
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Address
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Pincode
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Phone Number
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Email
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Date
+                        </th>
+                      </tr>
+                    </thead>
+
+                    {/* map allorder.cartItems */}
+
+                    {allorder.cartItems.map((item, index) => {
+                      const { title, category, imageUrl, price } = item;
+
+                      return (
+                        <tbody key={item.id}>
+                          <tr
+                            className="bg-gray-50 border-b  dark:border-gray-700"
+                            style={{
+                              backgroundColor:
+                                mode === "dark" ? "rgb(46 49 55)" : "",
+                              color: mode === "dark" ? "white" : "",
+                            }}
+                          >
+                            <td
+                              className="px-6 py-4 text-black "
+                              style={{ color: mode === "dark" ? "white" : "" }}
+                            >
+                              {index + 1}.
+                            </td>
+                            <td
+                              className="px-6 py-4 text-black "
+                              style={{ color: mode === "dark" ? "white" : "" }}
+                            >
+                              {allorder.paymentId}
+                            </td>
+                            <th
+                              scope="row"
+                              className="px-6 py-4 font-medium text-black whitespace-nowrap"
+                            >
+                              <img className="w-16" src={imageUrl} alt="img" />
+                            </th>
+                            <td
+                              className="px-6 py-4 text-black "
+                              style={{ color: mode === "dark" ? "white" : "" }}
+                            >
+                              {title}
+                            </td>
+                            <td
+                              className="px-6 py-4 text-black "
+                              style={{ color: mode === "dark" ? "white" : "" }}
+                            >
+                              ₹{price}
+                            </td>
+                            <td
+                              className="px-6 py-4 text-black "
+                              style={{ color: mode === "dark" ? "white" : "" }}
+                            >
+                              {category}
+                            </td>
+
+                            <td
+                              className="px-6 py-4 text-black "
+                              style={{ color: mode === "dark" ? "white" : "" }}
+                            >
+                              {allorder.addressInfo.name}
+                            </td>
+                            <td
+                              className="px-6 py-4 text-black "
+                              style={{ color: mode === "dark" ? "white" : "" }}
+                            >
+                              {allorder.addressInfo.address}
+                            </td>
+                            <td
+                              className="px-6 py-4 text-black "
+                              style={{ color: mode === "dark" ? "white" : "" }}
+                            >
+                              {allorder.addressInfo.pincode}
+                            </td>
+                            <td
+                              className="px-6 py-4 text-black "
+                              style={{ color: mode === "dark" ? "white" : "" }}
+                            >
+                              {allorder.addressInfo.phoneNumber}
+                            </td>
+                            <td
+                              className="px-6 py-4 text-black "
+                              style={{ color: mode === "dark" ? "white" : "" }}
+                            >
+                              {allorder.email}
+                            </td>
+                            <td
+                              className="px-6 py-4 text-black "
+                              style={{ color: mode === "dark" ? "white" : "" }}
+                            >
+                              {allorder.date}
+                            </td>
+                          </tr>
+                        </tbody>
+                      );
+                    })}
+                  </table>
+                );
+              })}
+            </section>
           </TabPanel>
 
           {/* user panel */}
           <TabPanel>
-            {/* <User addressInfo={addressInfo} setAddressInfo={setAddressInfo} setLoading={setLoading} /> */}
-            <div className="relative overflow-x-auto mb-10">
+            <section className="relative overflow-x-auto mb-10">
               <h1
                 className=" text-center mb-5 text-3xl font-semibold underline"
                 style={{ color: mode === "dark" ? "white" : "" }}
@@ -471,7 +494,7 @@ const DashboardTab = () => {
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </section>
           </TabPanel>
         </Tabs>
       </div>
