@@ -36,6 +36,7 @@ const MyState = (props) => {
   const [products, setProducts] = useState(defaultProduct);
   const [product, setProduct] = useState([]);
   const [order, setOrder] = useState([]);
+  const [user, setUser] = useState([]);
 
   const clearFields = () => {
     setProducts(defaultProduct);
@@ -43,7 +44,7 @@ const MyState = (props) => {
 
   // ********************** Get Product Section  **********************
 
-  const getProduct = useCallback(() => {
+  const getProductData = useCallback(() => {
     setLoading(true);
     try {
       // Creates a query to get data from the "products" collection in a Firestore database
@@ -75,10 +76,6 @@ const MyState = (props) => {
     setLoading(false);
   });
 
-  useEffect(() => {
-    getProduct();
-  }, []);
-
   // ********************** Add Products Section  **********************
   const addProduct = async () => {
     if (
@@ -104,7 +101,7 @@ const MyState = (props) => {
       setTimeout(() => {
         window.location.href = "/dashboard";
       }, 700);
-      getProduct();
+      getProductData();
 
       setLoading(false);
     } catch (error) {
@@ -139,7 +136,7 @@ const MyState = (props) => {
         window.location.href = "/dashboard";
       }, 800);
 
-      getProduct(); // Fetch updated product data from the database
+      getProductData(); // Fetch updated product data from the database
 
       setLoading(false);
     } catch (error) {
@@ -162,7 +159,7 @@ const MyState = (props) => {
 
       toast.success("Product Deleted successfully");
       setLoading(false);
-      getProduct();
+      getProductData();
     } catch (error) {
       console.error(error);
       toast.error("Failed to delete product. Please try again later.");
@@ -192,9 +189,27 @@ const MyState = (props) => {
     }
   };
 
-  useEffect(() => {
-    getOrderData();
-  }, []);
+  // ********************** User Section  **********************
+
+  const getUserData = async () => {
+    setLoading(true);
+
+    try {
+      const result = await getDocs(collection(fireDB, "user"));
+      const usersArray = [];
+
+      result.forEach((doc) => {
+        usersArray.push(doc.data());
+        setLoading(false);
+      });
+
+      setUser(usersArray);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   // ********************** Toggle mode Section  **********************
   const toggleMode = () => {
@@ -208,6 +223,14 @@ const MyState = (props) => {
       document.body.style.backgroundColor = "white";
     }
   };
+
+  // ********************** Admin's Dashboard Section  **********************
+
+  useEffect(() => {
+    getProductData();
+    getOrderData();
+    getUserData();
+  }, []);
 
   return (
     <MyContext.Provider
@@ -224,6 +247,7 @@ const MyState = (props) => {
         updateProduct,
         deleteProduct,
         order,
+        user,
       }}
     >
       {props.children}
