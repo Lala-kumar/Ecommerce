@@ -10,6 +10,7 @@ import {
   setDoc,
   deleteDoc,
   doc,
+  getDocs,
 } from "firebase/firestore";
 
 import { fireDB } from "../fireabase/firebaseConfig";
@@ -34,6 +35,7 @@ const MyState = (props) => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState(defaultProduct);
   const [product, setProduct] = useState([]);
+  const [order, setOrder] = useState([]);
 
   const clearFields = () => {
     setProducts(defaultProduct);
@@ -168,7 +170,32 @@ const MyState = (props) => {
     }
   };
 
-  
+  // ********************** Order Section  **********************
+
+  const getOrderData = async () => {
+    setLoading(true);
+
+    try {
+      const result = await getDocs(collection(fireDB, "orders"));
+      const ordersArray = [];
+
+      result.forEach((doc) => {
+        ordersArray.push(doc.data()); // Extract data from each document and add it to the ordersArray.
+        setLoading(false);
+      });
+
+      setOrder(ordersArray);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getOrderData();
+  }, []);
+
   // ********************** Toggle mode Section  **********************
   const toggleMode = () => {
     if (mode === "light") {
@@ -196,6 +223,7 @@ const MyState = (props) => {
         editHandler,
         updateProduct,
         deleteProduct,
+        order,
       }}
     >
       {props.children}
