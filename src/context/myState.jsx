@@ -37,6 +37,9 @@ const MyState = (props) => {
   const [product, setProduct] = useState([]);
   const [order, setOrder] = useState([]);
   const [user, setUser] = useState([]);
+  const [searchkey, setSearchkey] = useState("");
+  const [filterType, setFilterType] = useState("");
+  const [filterPrice, setFilterPrice] = useState("");
 
   const clearFields = () => {
     setProducts(defaultProduct);
@@ -248,6 +251,12 @@ const MyState = (props) => {
         deleteProduct,
         order,
         user,
+        searchkey,
+        setSearchkey,
+        filterType,
+        setFilterType,
+        filterPrice,
+        setFilterPrice,
       }}
     >
       {props.children}

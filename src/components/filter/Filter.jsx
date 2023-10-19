@@ -3,7 +3,16 @@ import myContext from "../../context/myContext";
 
 const Filter = () => {
   const context = useContext(myContext);
-  const { mode } = context;
+  const {
+    mode,
+    searchkey,
+    setSearchkey,
+    filterType,
+    setFilterType,
+    filterPrice,
+    setFilterPrice,
+    product,
+  } = context;
 
   return (
     <section className=" container mx-auto px-4 mt-5 ">
@@ -28,6 +37,8 @@ const Filter = () => {
           </div>
 
           <input
+            value={searchkey}
+            onChange={(e) => setSearchkey(e.target.value)}
             type="text"
             name="searchkey"
             id="searchkey"
@@ -44,6 +55,9 @@ const Filter = () => {
         <section className="flex items-center justify-between mt-4">
           <p className="font-medium">Filters</p>
           <button
+            onClick={(e) => {
+              setFilterPrice(""), setFilterType("");
+            }}
             className="px-4 py-2  hover:bg-gray-400 hover:text-gray-800 text-sm font-medium rounded-md shadow-2xl "
             style={{ color: mode === "dark" ? "white" : "" }}
           >
@@ -51,32 +65,42 @@ const Filter = () => {
           </button>
         </section>
 
-        {/* Others */}
+        {/* Filters Inputs */}
         <section className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
           <select
-            className="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent outline-0 focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+            value={filterType}
+            onChange={(e) => setFilterType(e.target.value)}
+            className="px-4 py-3 w-full rounded-md  border-transparent outline-0 focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
             style={{
               backgroundColor: mode === "dark" ? "rgb(64 66 70)" : "",
               color: mode === "dark" ? "white" : "",
             }}
           >
-            <option value="jacket">Jacket</option>
-            <option value="shirt">shirt</option>
-            <option value="mobile">mobile</option>
-            <option value="jacket">Jacket</option>
+            {product.map((item, index) => {
+              return (
+                <option key={index} value={item.category}>
+                  {item.category}
+                </option>
+              );
+            })}
           </select>
 
           <select
-            className="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent outline-0  focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+            value={filterPrice}
+            onChange={(e) => setFilterPrice(e.target.value)}
+            className="px-4 py-3 w-full rounded-md  border-transparent outline-0  focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
             style={{
               backgroundColor: mode === "dark" ? "rgb(64 66 70)" : "",
               color: mode === "dark" ? "white" : "",
             }}
           >
-            <option value="100">100</option>
-            <option value="200">200</option>
-            <option value="300">300</option>
-            <option value="400">400</option>
+            {product.map((item, index) => {
+              return (
+                <option key={index} value={item.price}>
+                  {item.price}
+                </option>
+              );
+            })}
           </select>
         </section>
       </div>
