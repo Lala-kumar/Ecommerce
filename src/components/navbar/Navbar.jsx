@@ -10,7 +10,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { RxCross2 } from "react-icons/rx";
 
 const Navbar = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const context = useContext(myContext);
   const { mode, toggleMode } = context;
@@ -22,9 +22,9 @@ const Navbar = () => {
 
   const logout = () => {
     localStorage.removeItem("user");
-    window.location.href = "/login";
+    // window.location.href = "/login";
 
-    // navigate("/login");
+    navigate("/login");
     // <Navigate to={"/login"} />;
   };
 

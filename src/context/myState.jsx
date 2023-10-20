@@ -15,6 +15,7 @@ import {
 
 import { fireDB } from "../fireabase/firebaseConfig";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const defaultProduct = {
   title: "",
@@ -40,6 +41,7 @@ const MyState = (props) => {
   const [searchkey, setSearchkey] = useState("");
   const [filterType, setFilterType] = useState("");
   const [filterPrice, setFilterPrice] = useState("");
+  const navigate = useNavigate();
 
   const clearFields = () => {
     setProducts(defaultProduct);
@@ -102,7 +104,8 @@ const MyState = (props) => {
       clearFields();
       toast.success("Added product succefully!");
       setTimeout(() => {
-        window.location.href = "/dashboard";
+        // window.location.href = "/dashboard";
+        navigate("/dashboard");
       }, 700);
       getProductData();
 
@@ -136,7 +139,8 @@ const MyState = (props) => {
       clearFields();
       toast.success("Product Updated successfully");
       setTimeout(() => {
-        window.location.href = "/dashboard";
+        // window.location.href = "/dashboard";
+        navigate("/dashboard");
       }, 800);
 
       getProductData(); // Fetch updated product data from the database
