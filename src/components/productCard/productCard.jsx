@@ -58,7 +58,7 @@ const ProductCard = () => {
         ) : (
           <section className="flex flex-wrap -m-4 justify-center items-center">
             {filteredProducts.map((item, index) => {
-              const { title, price, imageUrl } = item;
+              const { title, price, imageUrl, id } = item;
 
               return (
                 <div
@@ -74,9 +74,12 @@ const ProductCard = () => {
                   >
                     <div className="flex justify-center cursor-pointer">
                       <img
-                        className=" rounded-2xl w-full h-80 p-2 hover:scale-110 transition-scale-110  duration-300 ease-in-out"
+                        className="sm:py-6 rounded-2xl w-full h-80 p-2 hover:scale-110 transition-scale-110  duration-300 ease-in-out"
                         src={imageUrl}
                         alt="blog"
+                        onClick={() =>
+                          (window.location.href = `/productinfo/${id}`)
+                        }
                       />
                     </div>
 
