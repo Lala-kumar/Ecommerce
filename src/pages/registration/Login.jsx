@@ -46,7 +46,7 @@ const Login = () => {
 
       setLoading(false);
     } catch (error) {
-      toast.error("Sigin Failed", {
+      toast.error("Login Failed", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: true,

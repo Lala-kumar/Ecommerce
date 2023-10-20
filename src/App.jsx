@@ -55,7 +55,14 @@ const router = createBrowserRouter([
       </ProtectedRouteForUser>
     ),
   },
-  { path: "/cart", element: <Cart /> },
+  {
+    path: "/cart",
+    element: (
+      <ProtectedRouteForUser>
+        <Cart />
+      </ProtectedRouteForUser>
+    ),
+  },
   {
     path: "/dashboard",
     element: (
@@ -66,7 +73,14 @@ const router = createBrowserRouter([
   },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <Signup /> },
-  { path: "/productinfo/:id", element: <ProductInfo /> },
+  {
+    path: "/productinfo/:id",
+    element: (
+      <ProtectedRouteForUser>
+        <ProductInfo />
+      </ProtectedRouteForUser>
+    ),
+  },
   {
     path: "/addproduct",
     element: (
@@ -83,7 +97,15 @@ const router = createBrowserRouter([
       </ProtectedRouteForAdmin>
     ),
   },
-  { path: "/allproducts", element: <Allproducts /> },
+  {
+    path: "/allproducts",
+    element: (
+      <ProtectedRouteForUser>
+        {" "}
+        <Allproducts />
+      </ProtectedRouteForUser>
+    ),
+  },
   { path: "/*", element: <NoPage /> },
 ]);
 
