@@ -41,7 +41,6 @@ const Order = () => {
                   .filter((obj) => obj.userid === userid)
                   .map(
                     (orderItem) => (
-                      console.log(orderItem),
                       (
                         <li
                           key={`${orderItem.userid}_${orderItem.date}_${orderItem.paymentId}`}

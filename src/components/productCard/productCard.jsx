@@ -34,11 +34,6 @@ const ProductCard = () => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const filteredProducts = product
-    .filter((obj) => obj.title.toLowerCase().includes(searchkey))
-    .filter((obj) => obj.category.toLowerCase().includes(filterType))
-    .filter((obj) => obj.price.includes(filterPrice));
-
   return (
     <div className="text-gray-600 body-font">
       <section className="container px-5 py-8 md:py-16 mx-auto">
@@ -52,15 +47,9 @@ const ProductCard = () => {
           <div className="h-1 w-20 bg-pink-600 rounded"></div>
         </div>
 
-        {filteredProducts.length === 0 ? (
-          <div className="text-center w-full mt-4">
-            <p className="text-lg font-medium">
-              No products available with selected filters.
-            </p>
-          </div>
-        ) : (
-          <section className="flex flex-wrap -m-4 justify-center items-center">
-            {filteredProducts.map((item, index) => {
+        <section className="flex flex-wrap -m-4 justify-center items-center">
+          {product
+            .map((item, index) => {
               const { title, price, imageUrl, id } = item;
 
               return (
@@ -80,10 +69,7 @@ const ProductCard = () => {
                         className="sm:py-6 rounded-2xl w-full h-80 p-2 hover:scale-110 transition-scale-110  duration-300 ease-in-out"
                         src={imageUrl}
                         alt="blog"
-                        onClick={() =>
-                          // (window.location.href = `/productinfo/${id}`)
-                          navigation(`/productinfo/${id}`)
-                        }
+                        onClick={() => navigation(`/productinfo/${id}`)}
                       />
                     </div>
 
@@ -120,9 +106,9 @@ const ProductCard = () => {
                   </div>
                 </div>
               );
-            })}
-          </section>
-        )}
+            })
+            .slice(0, 8)}
+        </section>
       </section>
     </div>
   );

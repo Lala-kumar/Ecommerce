@@ -21,6 +21,7 @@ import MyState from "./context/myState";
 import ProductInfo from "./pages/productInfo/ProductInfo";
 import AddProduct from "./pages/admin/page/AddProduct";
 import UpdateProduct from "./pages/admin/page/UpdateProduct";
+import Allproducts from "./pages/allproducts/Allproducts";
 
 // user protected route
 
@@ -43,7 +44,6 @@ export const ProtectedRouteForAdmin = ({ children }) => {
     return <Navigate to={"/login"} />;
   }
 };
-
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -83,6 +83,7 @@ const router = createBrowserRouter([
       </ProtectedRouteForAdmin>
     ),
   },
+  { path: "/allproducts", element: <Allproducts /> },
   { path: "/*", element: <NoPage /> },
 ]);
 
