@@ -3,6 +3,7 @@ import myContext from "../../context/myContext";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = () => {
   const context = useContext(myContext);
@@ -10,6 +11,8 @@ const ProductCard = () => {
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
+
+  const navigation = useNavigate();
 
   // add to cart
   const addCart = (product) => {
@@ -78,7 +81,8 @@ const ProductCard = () => {
                         src={imageUrl}
                         alt="blog"
                         onClick={() =>
-                          (window.location.href = `/productinfo/${id}`)
+                          // (window.location.href = `/productinfo/${id}`)
+                          navigation(`/productinfo/${id}`)
                         }
                       />
                     </div>
