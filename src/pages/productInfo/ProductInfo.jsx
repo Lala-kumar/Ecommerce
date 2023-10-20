@@ -7,8 +7,7 @@ import { fireDB } from "../../fireabase/firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
-import Loader from '../../components/loader/Loader'
-
+import Loader from "../../components/loader/Loader";
 
 const ProductInfo = () => {
   const [products, setProducts] = useState("");
@@ -58,9 +57,13 @@ const ProductInfo = () => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // if (loading) {
-  //   return <Loader />;
-  // }
+  if (loading) {
+    return <Loader />;
+  }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Layout>

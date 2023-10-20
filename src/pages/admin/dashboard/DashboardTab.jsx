@@ -1,27 +1,19 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import myContext from "../../../context/myContext";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { FaUser, FaCartPlus } from "react-icons/fa";
-import { AiFillShopping, AiFillPlusCircle, AiFillDelete } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { AiFillShopping } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
 
 const DashboardTab = () => {
   const context = useContext(myContext);
   const { mode, product, editHandler, deleteProduct, order, user } = context;
 
-  let [isOpen, setIsOpen] = useState(false);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
+  const navigate = useNavigate();
 
   const add = () => {
-    window.location.href = "/addproduct";
+    navigate("/addproduct");
   };
 
   return (
@@ -125,14 +117,7 @@ const DashboardTab = () => {
                   </thead>
 
                   {product.map((item, index) => {
-                    const {
-                      title,
-                      price,
-                      imageUrl,
-                      category,
-                      description,
-                      date,
-                    } = item;
+                    const { title, price, imageUrl, category, date } = item;
                     return (
                       <tbody key={index}>
                         <tr
@@ -437,7 +422,6 @@ const DashboardTab = () => {
                 {/* map user */}
 
                 {user.map((item, index) => {
-                  
                   const { name, uid, email } = item;
 
                   return (
@@ -484,7 +468,6 @@ const DashboardTab = () => {
           </TabPanel>
         </Tabs>
       </div>
-      {/* </div> */}
     </Fragment>
   );
 };

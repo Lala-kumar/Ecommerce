@@ -29,12 +29,11 @@ const Login = () => {
       setLoading(true);
       const result = await signInWithEmailAndPassword(auth, email, password);
 
-      
       localStorage.setItem("user", JSON.stringify(result));
-      
+
       navigate("/");
 
-      toast.success("Login successfully!",{
+      toast.success("Login successfully!", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: true,
@@ -47,7 +46,7 @@ const Login = () => {
 
       setLoading(false);
     } catch (error) {
-      toast.error('Sigin Failed', {
+      toast.error("Sigin Failed", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: true,
@@ -56,14 +55,19 @@ const Login = () => {
         draggable: true,
         progress: undefined,
         theme: "colored",
-      }); 
+      });
       setLoading(false);
     }
+    
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className=" flex justify-center items-center h-screen">
-      {loading && <Loader/>  }
+      
       <div className=" bg-gray-800 px-10 py-10 rounded-xl ">
         <div className="">
           <h1 className="text-center text-white text-xl mb-4 font-bold">

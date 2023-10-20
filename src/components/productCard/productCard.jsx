@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 const ProductCard = () => {
   const context = useContext(myContext);
-  const { mode, product, searchkey, filterType, filterPrice } = context;
+  const { mode, product } = context;
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
 
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   // add to cart
   const addCart = (product) => {
@@ -36,7 +36,7 @@ const ProductCard = () => {
 
   return (
     <div className="text-gray-600 body-font">
-      <section className="container px-5 py-8 md:py-16 mx-auto">
+      <section className="container px-5 md:py-16 mx-auto">
         <div className="lg:w-1/2 w-full mb-6 lg:mb-10">
           <h1
             className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
@@ -69,7 +69,7 @@ const ProductCard = () => {
                         className="sm:py-6 rounded-2xl w-full h-80 p-2 hover:scale-110 transition-scale-110  duration-300 ease-in-out"
                         src={imageUrl}
                         alt="blog"
-                        onClick={() => navigation(`/productinfo/${id}`)}
+                        onClick={() => navigate(`/productinfo/${id}`)}
                       />
                     </div>
 
@@ -107,7 +107,7 @@ const ProductCard = () => {
                 </div>
               );
             })
-            .slice(0, 8)}
+            .slice(0, 4)}
         </section>
       </section>
     </div>

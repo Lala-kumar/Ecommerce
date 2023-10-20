@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import myContext from "../../context/myContext";
 import Layout from "../../components/layout/Layout";
 import Loader from "../../components/loader/Loader";
@@ -11,6 +11,10 @@ const Order = () => {
   if (loading) {
     return <Loader />;
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Layout>
@@ -33,86 +37,76 @@ const Order = () => {
           You haven't order yet!
         </h1>
       ) : (
-        <ul className="list-none">
+        <div>
           {order.length > 0 ? (
-            <div className="h-full p-10 m-12 bg-slate-0">
-              <ul className="list-none pl-4">
-                {order
-                  .filter((obj) => obj.userid === userid)
-                  .map(
-                    (orderItem) => (
-                      (
-                        <li
-                          key={`${orderItem.userid}_${orderItem.date}_${orderItem.paymentId}`}
-                        >
-                          <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
-                            {orderItem.cartItems.map((item) => (
-                              <div
-                                className="rounded-lg md:w-2/3"
-                                key={item.id}
-                              >
-                                <div
-                                  className="justify-between mb-6 rounded-lg bg-white p-6 shadow-2xl sm:flex sm:justify-start"
+            <ul className="list-none pl-4">
+              {order
+                .filter((obj) => obj.userid === userid)
+                .map((orderItem) => (
+                  <li
+                    key={`${orderItem.userid}_${orderItem.date}_${orderItem.paymentId}`}
+                  >
+                    <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+                      {orderItem.cartItems.map((item) => (
+                        <div className="rounded-lg md:w-2/3" key={item.id}>
+                          <div
+                            className="justify-between mb-6 rounded-lg bg-white p-6 shadow-2xl sm:flex sm:justify-start"
+                            style={{
+                              backgroundColor: mode === "dark" ? "#282c34" : "",
+                              color: mode === "dark" ? "white" : "",
+                            }}
+                          >
+                            <img
+                              src={item.imageUrl}
+                              alt="product-image"
+                              className="w-full rounded-lg sm:w-40"
+                            />
+
+                            <section className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+                              <div className="mt-5 sm:mt-0">
+                                <h1
+                                  className="text-2xl font-bold text-gray-900"
                                   style={{
-                                    backgroundColor:
-                                      mode === "dark" ? "#282c34" : "",
                                     color: mode === "dark" ? "white" : "",
                                   }}
                                 >
-                                  <img
-                                    src={item.imageUrl}
-                                    alt="product-image"
-                                    className="w-full rounded-lg sm:w-40"
-                                  />
+                                  {item.title}
+                                </h1>
 
-                                  <section className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-                                    <div className="mt-5 sm:mt-0">
-                                      <h1
-                                        className="text-2xl font-bold text-gray-900"
-                                        style={{
-                                          color: mode === "dark" ? "white" : "",
-                                        }}
-                                      >
-                                        {item.title}
-                                      </h1>
+                                <p
+                                  className="mt-1 text-base text-gray-700"
+                                  style={{
+                                    color: mode === "dark" ? "white" : "",
+                                  }}
+                                >
+                                  {item.category}
+                                </p>
 
-                                      <p
-                                        className="mt-1 text-base text-gray-700"
-                                        style={{
-                                          color: mode === "dark" ? "white" : "",
-                                        }}
-                                      >
-                                        {item.category}
-                                      </p>
-
-                                      <p
-                                        className="mt-1 text-base text-gray-700"
-                                        style={{
-                                          color: mode === "dark" ? "white" : "",
-                                        }}
-                                      >
-                                        {item.description}
-                                      </p>
-                                      <p
-                                        className="mt-1 text-base text-gray-700"
-                                        style={{
-                                          color: mode === "dark" ? "white" : "",
-                                        }}
-                                      >
-                                        ₹{item.price}
-                                      </p>
-                                    </div>
-                                  </section>
-                                </div>
+                                <p
+                                  className="mt-1 text-base text-gray-700"
+                                  style={{
+                                    color: mode === "dark" ? "white" : "",
+                                  }}
+                                >
+                                  {item.description}
+                                </p>
+                                <p
+                                  className="mt-1 text-base text-gray-700"
+                                  style={{
+                                    color: mode === "dark" ? "white" : "",
+                                  }}
+                                >
+                                  ₹{item.price}
+                                </p>
                               </div>
-                            ))}
+                            </section>
                           </div>
-                        </li>
-                      )
-                    )
-                  )}
-              </ul>
-            </div>
+                        </div>
+                      ))}
+                    </div>
+                  </li>
+                ))}
+            </ul>
           ) : (
             <h1
               className="text-center bg-orange-900 text-2xl my-60"
@@ -123,10 +117,10 @@ const Order = () => {
               You haven't order yet!
             </h1>
           )}
-        </ul>
+        </div>
       )}
     </Layout>
   );
 };
 
-export default Order;  
+export default Order;
