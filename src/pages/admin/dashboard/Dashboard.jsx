@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { FaUserTie } from "react-icons/fa";
+import React, { useContext, useEffect } from "react";
+import { FaUserTie, FaUsers, FaTruck, FaShoppingBag } from "react-icons/fa";
 import myContext from "../../../context/myContext";
 import Layout from "../../../components/layout/Layout";
 import DashboardTab from "./DashboardTab";
@@ -7,7 +7,11 @@ import DashboardTab from "./DashboardTab";
 const Dashboard = () => {
   const context = useContext(myContext);
 
-  const { mode } = context;
+  const { mode, product, user, order } = context;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   return (
     <Layout>
@@ -26,13 +30,13 @@ const Dashboard = () => {
                 className="text-purple-500 w-12 h-12 mb-3 inline-block"
                 viewBox="0 0 24 24"
               >
-                <FaUserTie size={50} />
+                <FaShoppingBag size={45} />
               </div>
               <h2
                 className="title-font font-medium text-3xl text-black fonts1"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                10
+                {product.length}
               </h2>
               <p
                 className=" text-purple-500  font-bold"
@@ -56,13 +60,13 @@ const Dashboard = () => {
                 className="text-purple-500 w-12 h-12 mb-3 inline-block"
                 viewBox="0 0 24 24"
               >
-                <FaUserTie size={50} />
+                <FaTruck size={50} />
               </div>
               <h2
                 className="title-font font-medium text-3xl text-black fonts1"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                10
+                {order.length}
               </h2>
               <p
                 className=" text-purple-500  font-bold"
@@ -86,13 +90,13 @@ const Dashboard = () => {
                 className="text-purple-500 w-12 h-12 mb-3 inline-block"
                 viewBox="0 0 24 24"
               >
-                <FaUserTie size={50} />
+                <FaUserTie size={45} />
               </div>
               <h2
                 className="title-font font-medium text-3xl text-black fonts1"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                20
+                {user.length}
               </h2>
               <p
                 className=" text-purple-500  font-bold"
@@ -103,7 +107,7 @@ const Dashboard = () => {
             </div>
           </section>
 
-          {/* total products */}
+          {/* total customer */}
           <section className="p-4 md:w-1/4 sm:w-1/2 w-full">
             <div
               className=" border-2 hover:shadow-purple-600 shadow-[inset_0_0_10px_rgba(0,0,0,0.6)] bg-gray-100 border-gray-300    px-4 py-3 rounded-xl"
@@ -116,24 +120,24 @@ const Dashboard = () => {
                 className="text-purple-500 w-12 h-12 mb-3 inline-block"
                 viewBox="0 0 24 24"
               >
-                <FaUserTie size={50} />
+                <FaUsers size={60} />
               </div>
               <h2
                 className="title-font font-medium text-3xl text-black fonts1"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                20
+                {user.length}
               </h2>
               <p
                 className=" text-purple-500  font-bold"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                Total Products
+                Total Customer
               </p>
             </div>
           </section>
         </div>
-        <DashboardTab/>
+        <DashboardTab />
       </section>
     </Layout>
   );

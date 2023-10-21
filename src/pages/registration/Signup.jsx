@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import myContext from "../../context/myContext";
 import { toast } from "react-toastify";
 import Loader from "../../components/loader/Loader";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, fireDB } from "../../fireabase/firebaseConfig";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 
@@ -12,6 +13,8 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const context = useContext(myContext);
   const { loading, setLoading } = context;
@@ -48,8 +51,12 @@ const Signup = () => {
 
       //storing user to firestore
       const userRef = collection(fireDB, "user");
-
       await addDoc(userRef, user);
+
+      //getting user to firestore
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      localStorage.setItem("user", JSON.stringify(result));
+      navigate("/");
 
       setName("");
       setEmail("");
@@ -59,6 +66,7 @@ const Signup = () => {
 
       setLoading(false);
     } catch (error) {
+      console.error("Signin Failed: ", error.message);
       toast.error("Signin Failed", {
         position: "top-right",
         autoClose: 5000,
