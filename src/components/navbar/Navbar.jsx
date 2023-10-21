@@ -22,7 +22,8 @@ const Navbar = () => {
 
   const logout = () => {
     localStorage.removeItem("user");
-    // window.location.href = "/login";
+    localStorage.removeItem("cart");
+    
 
     navigate("/login");
     // <Navigate to={"/login"} />;
@@ -82,6 +83,16 @@ const Navbar = () => {
                   </div>
 
                   <section className="space-y-6 border-t border-gray-200 px-4 py-6">
+                    <div className="flow-root">
+                      <Link
+                        to={"/"}
+                        className="-m-2 block p-2 font-medium text-gray-900 "
+                        style={{ color: mode === "dark" ? "white" : "" }}
+                      >
+                        Home
+                      </Link>
+                    </div>
+
                     {!user ? (
                       <div className="flow-root">
                         <Link
@@ -251,6 +262,14 @@ const Navbar = () => {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                  <Link
+                    to={"/"}
+                    className="text-sm font-medium text-gray-700 "
+                    style={{ color: mode === "dark" ? "white" : "" }}
+                  >
+                    Home
+                  </Link>
+
                   {!user ? (
                     <Link
                       to={"/login"}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import myContext from "../../context/myContext";
 import Layout from "../../components/layout/Layout";
 import Loader from "../../components/loader/Loader";
@@ -11,10 +11,6 @@ const Order = () => {
   if (loading) {
     return <Loader />;
   }
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <Layout>
@@ -46,9 +42,9 @@ const Order = () => {
                   <li
                     key={`${orderItem.userid}_${orderItem.date}_${orderItem.paymentId}`}
                   >
-                    <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+                    <div className="mx-auto max-w-5xl justify-center px-6 xl:flex md:flex md:space-x-6 xl:px-0">
                       {orderItem.cartItems.map((item) => (
-                        <div className="rounded-lg md:w-2/3" key={item.id}>
+                        <div className="rounded-lg md:w-2/3 xl:w-1/2" key={item.id}>
                           <div
                             className="justify-between mb-6 rounded-lg bg-white p-6 shadow-2xl sm:flex sm:justify-start"
                             style={{
