@@ -27,6 +27,7 @@ const Allproduct = () => {
       category: product.category,
       description: product.description,
       date: product.date,
+      quantity:1
     };
 
     dispatch(addToCart(serializedProduct));
@@ -60,7 +61,7 @@ const Allproduct = () => {
           ) : (
             <section className="flex flex-wrap -m-4 justify-center items-center">
               {filteredProducts.map((item, index) => {
-                const { title, price, imageUrl, id } = item;
+                const { title, price, imageUrl, id, quantity } = item;
 
                 return (
                   <div

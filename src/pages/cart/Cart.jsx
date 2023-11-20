@@ -141,7 +141,7 @@ const Cart = () => {
 
           <section className="rounded-lg md:w-2/3 ">
             {cartItems.map((item, index) => {
-              const { imageUrl, title, price, description } = item;
+              const { imageUrl, title, price, description, quantity } = item;
               return (
                 <div
                   key={index}
@@ -178,6 +178,13 @@ const Cart = () => {
                         style={{ color: mode === "dark" ? "white" : "" }}
                       >
                         ₹{price}
+                      </p>
+
+                      <p
+                        className="mt-1 text-xl font-semibold text-gray-900"
+                        style={{ color: mode === "dark" ? "white" : "" }}
+                      >
+                        Quatity: {quantity}
                       </p>
                     </div>
 
@@ -226,7 +233,7 @@ const Cart = () => {
                 className="text-gray-700"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                {totalAmount}
+                ₹{totalAmount}
               </p>
             </div>
 
@@ -242,7 +249,7 @@ const Cart = () => {
                 className="text-gray-700"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                {totalAmount > 300 ? 0 : shipping}
+                ₹{totalAmount > 300 ? 0 : shipping}
               </p>
             </div>
 
@@ -261,7 +268,7 @@ const Cart = () => {
                   className="mb-1 text-lg font-bold"
                   style={{ color: mode === "dark" ? "white" : "" }}
                 >
-                  {grandTotal}
+                  ₹{grandTotal}
                 </p>
               </div>
             </div>

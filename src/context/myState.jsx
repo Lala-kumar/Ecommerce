@@ -29,6 +29,7 @@ const defaultProduct = {
     day: "2-digit",
     year: "numeric",
   }),
+  quantity: 0,
 };
 
 const MyState = (props) => {
@@ -63,7 +64,7 @@ const MyState = (props) => {
 
         QuerySnapshot.forEach((doc) => {
           // Iterates through the documents in the query result and constructs an array of products
-          productsArray.push({ ...doc.data(), id: doc.id });
+          productsArray.push({ ...doc.data(), id: doc.id, quantity: doc.quantity });
         });
 
         setProduct(productsArray);
