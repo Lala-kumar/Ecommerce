@@ -38,7 +38,7 @@ const Cart = () => {
   useEffect(() => {
     let temp = 0;
     cartItems.forEach((cartItems) => {
-      temp += parseInt(cartItems.price);
+      temp += parseInt(cartItems.price * cartItems.quantity);
     });
     setTotalAmount(temp);
   }, [cartItems]);
