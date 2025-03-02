@@ -49,7 +49,7 @@ const Login = () => {
       console.error("Login Failed: ", error.message);
       toast.error("Login Failed", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 2000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,

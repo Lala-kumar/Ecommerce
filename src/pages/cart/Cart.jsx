@@ -51,7 +51,7 @@ const Cart = () => {
   } else {
     grandTotal = shipping + totalAmount;
   }
-
+  
   //razorpay integration
   const buyNow = async () => {
     //validation
@@ -67,7 +67,7 @@ const Cart = () => {
         theme: "colored",
       });
     }
-
+    
     //address information of customer
     const addressInfo = {
       name,
